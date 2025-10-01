@@ -26,7 +26,9 @@ export const CONTRACTS = {
 export type ChainType = 'base' | 'polygon'
 
 export function getContractAddress(contract: keyof typeof CONTRACTS, chain: ChainType): string {
-  return CONTRACTS[contract][chain]
+  // Use environment variables if available, otherwise fall back to hardcoded values
+  const envKey = `NEXT_PUBLIC_${contract}_${chain.toUpperCase()}` as keyof typeof process.env
+  return (process.env[envKey] as string) || CONTRACTS[contract][chain]
 }
 
 // Environment-based configuration

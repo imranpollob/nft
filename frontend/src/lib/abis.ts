@@ -178,4 +178,25 @@ export const SUB_PASS_1155_ABI = [
     stateMutability: 'view',
     type: 'function',
   },
+  {
+    inputs: [
+      { name: 'addr', type: 'address' },
+      { name: 'tierId', type: 'uint256' },
+    ],
+    name: 'activeUntilOf',
+    outputs: [{ name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'to', type: 'address' },
+      { name: 'tierId', type: 'uint256' },
+      { name: 'seconds_', type: 'uint256' },
+    ],
+    name: 'mintOrRenew',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
 ] as const
