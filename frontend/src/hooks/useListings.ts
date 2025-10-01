@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 import { mockListings, getUniqueCollections, filterListings } from '@/lib/mockData'
-import { Listing, ListingFilters } from '@/lib/types'
+import { ListingFilters } from '@/lib/types'
 
 export function useListings(filters?: ListingFilters) {
   const listings = useMemo(() => {

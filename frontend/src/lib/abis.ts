@@ -35,6 +35,86 @@ export const LISTING_MANAGER_ABI = [
     stateMutability: 'view',
     type: 'function',
   },
+  {
+    inputs: [
+      { name: 'nft', type: 'address' },
+      { name: 'tokenId', type: 'uint256' },
+      { name: 'pricePerSecond', type: 'uint256' },
+      { name: 'minDuration', type: 'uint256' },
+      { name: 'maxDuration', type: 'uint256' },
+      { name: 'deposit', type: 'uint256' },
+      { name: 'availabilityHash', type: 'bytes32' },
+    ],
+    name: 'createListing',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'nft', type: 'address' },
+      { name: 'tokenId', type: 'uint256' },
+      { name: 'pricePerSecond', type: 'uint256' },
+      { name: 'minDuration', type: 'uint256' },
+      { name: 'maxDuration', type: 'uint256' },
+      { name: 'deposit', type: 'uint256' },
+      { name: 'availabilityHash', type: 'bytes32' },
+    ],
+    name: 'updateListing',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'nft', type: 'address' },
+      { name: 'tokenId', type: 'uint256' },
+    ],
+    name: 'cancelListing',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+] as const
+
+export const ERC721_ABI = [
+  {
+    inputs: [
+      { name: 'to', type: 'address' },
+      { name: 'tokenId', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'owner', type: 'address' },
+      { name: 'operator', type: 'address' },
+    ],
+    name: 'isApprovedForAll',
+    outputs: [{ name: '', type: 'bool' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'operator', type: 'address' },
+      { name: 'approved', type: 'bool' },
+    ],
+    name: 'setApprovalForAll',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ name: 'tokenId', type: 'uint256' }],
+    name: 'ownerOf',
+    outputs: [{ name: '', type: 'address' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
 ] as const
 
 export const SUB_PASS_1155_ABI = [
