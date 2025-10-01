@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "./Escrow.sol";
 import "./ListingManager.sol";
 import "./Rentable721.sol";
@@ -36,6 +37,8 @@ contract RentalManager is ReentrancyGuard {
         uint256 deposit
     );
     event RentalFinalized(uint256 indexed rentalId, address indexed nft, uint256 indexed tokenId);
+    event PayoutReleased(uint256 indexed rentalId, address indexed to, uint256 amount);
+    event DepositRefunded(uint256 indexed rentalId, address indexed renter, uint256 amount);
 
     constructor(address _listingManager, address _feeRecipient, uint256 _protocolFeeBps) {
         listingManager = ListingManager(_listingManager);
@@ -48,6 +51,7 @@ contract RentalManager is ReentrancyGuard {
         require(start < end && start >= block.timestamp, "RentalManager: invalid times");
         ListingManager.Listing memory listing = listingManager.getListing(nft, tokenId);
         require(listing.active, "RentalManager: not listed");
+        require(listing.owner == IERC721(nft).ownerOf(tokenId), "RentalManager: ownership changed");
         uint256 duration = end - start;
         require(
             duration >= listing.minDuration && duration <= listing.maxDuration, "RentalManager: duration out of range"
@@ -114,9 +118,15 @@ contract RentalManager is ReentrancyGuard {
         uint256 fee = rental.amount * protocolFeeBps / 10000;
         uint256 toOwner = rental.amount - fee;
 
-        if (toOwner > 0) escrow.release(rentalId, listing.owner, toOwner);
+        if (toOwner > 0) {
+            escrow.release(rentalId, listing.owner, toOwner);
+            emit PayoutReleased(rentalId, listing.owner, toOwner);
+        }
         if (fee > 0) escrow.release(rentalId, feeRecipient, fee);
-        if (rental.deposit > 0) escrow.release(rentalId, rental.renter, rental.deposit);
+        if (rental.deposit > 0) {
+            escrow.release(rentalId, rental.renter, rental.deposit);
+            emit DepositRefunded(rentalId, rental.renter, rental.deposit);
+        }
 
         rental.finalized = true;
         emit RentalFinalized(rentalId, nft, tokenId);

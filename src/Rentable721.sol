@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
 interface IERC4907 {
     event UpdateUser(uint256 indexed tokenId, address indexed user, uint64 expires);
@@ -14,18 +15,23 @@ interface IERC4907 {
     function userExpires(uint256 tokenId) external view returns (uint256);
 }
 
-contract Rentable721 is ERC721, Ownable, IERC4907 {
+contract Rentable721 is ERC721, Ownable, IERC4907, IERC2981 {
     struct UserInfo {
         address user;
         uint64 expires;
     }
 
     mapping(uint256 => UserInfo) private _users;
+    address public marketplace;
 
     constructor() ERC721("RentableNFT", "RNFT") Ownable(msg.sender) {}
 
+    function setMarketplace(address _marketplace) external onlyOwner {
+        marketplace = _marketplace;
+    }
+
     function setUser(uint256 tokenId, address user, uint64 expires) external override {
-        require(_isApprovedOrOwner(msg.sender, tokenId), "Rentable721: caller is not owner nor approved");
+        require(msg.sender == marketplace, "Rentable721: only marketplace can set user");
         if (user != address(0)) {
             require(expires > block.timestamp, "Rentable721: expires must be in the future");
         }
@@ -57,5 +63,20 @@ contract Rentable721 is ERC721, Ownable, IERC4907 {
     function _update(address to, uint256 tokenId, address auth) internal virtual override returns (address) {
         require(userOf(tokenId) == address(0), "Rentable721: cannot transfer while rented");
         return super._update(to, tokenId, auth);
+    }
+
+    // ERC2981 Royalty
+    function royaltyInfo(uint256 tokenId, uint256 salePrice)
+        external
+        view
+        override
+        returns (address receiver, uint256 royaltyAmount)
+    {
+        require(_ownerOf(tokenId) != address(0), "Rentable721: token does not exist");
+        return (ownerOf(tokenId), salePrice * 500 / 10000); // 5% royalty to owner
+    }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, IERC165) returns (bool) {
+        return interfaceId == type(IERC2981).interfaceId || super.supportsInterface(interfaceId);
     }
 }

@@ -30,6 +30,9 @@ contract RentalManagerTest is Test {
         rentalManager = new RentalManager(address(listingManager), feeRecipient, 500); // 5% fee
 
         vm.prank(owner);
+        nft.setMarketplace(address(rentalManager));
+
+        vm.prank(owner);
         nft.mint(owner, tokenId);
 
         vm.prank(owner);

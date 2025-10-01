@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
 import "../src/Rentable721.sol";
+import "@openzeppelin/contracts/interfaces/IERC2981.sol";
 
 contract Rentable721Test is Test {
     Rentable721 rentable;
@@ -16,6 +17,8 @@ contract Rentable721Test is Test {
         rentable = new Rentable721();
         vm.prank(owner);
         rentable.mint(owner, tokenId);
+        vm.prank(owner);
+        rentable.setMarketplace(owner); // For testing, set owner as marketplace
     }
 
     function testSetUser() public {
@@ -45,10 +48,10 @@ contract Rentable721Test is Test {
         assertEq(rentable.userExpires(tokenId), 0);
     }
 
-    function testOnlyOwnerOrApprovedCanSetUser() public {
+    function testOnlyMarketplaceCanSetUser() public {
         uint64 expires = uint64(block.timestamp + 100);
         vm.prank(other);
-        vm.expectRevert("Rentable721: caller is not owner nor approved");
+        vm.expectRevert("Rentable721: only marketplace can set user");
         rentable.setUser(tokenId, user, expires);
     }
 
@@ -76,5 +79,16 @@ contract Rentable721Test is Test {
         vm.prank(owner);
         vm.expectRevert("Rentable721: expires must be in the future");
         rentable.setUser(tokenId, user, expires);
+    }
+
+    function testRoyaltyInfo() public view {
+        uint256 salePrice = 10000;
+        (address receiver, uint256 royaltyAmount) = rentable.royaltyInfo(tokenId, salePrice);
+        assertEq(receiver, owner);
+        assertEq(royaltyAmount, 500); // 5% of 10000
+    }
+
+    function testSupportsInterface() public view {
+        assertTrue(rentable.supportsInterface(type(IERC2981).interfaceId));
     }
 }
