@@ -117,6 +117,56 @@ export const ERC721_ABI = [
   },
 ] as const
 
+export const RENTAL_MANAGER_ABI = [
+  {
+    inputs: [
+      { name: 'nft', type: 'address' },
+      { name: 'tokenId', type: 'uint256' },
+      { name: 'start', type: 'uint256' },
+      { name: 'end', type: 'uint256' },
+    ],
+    name: 'rent',
+    outputs: [],
+    stateMutability: 'payable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'nft', type: 'address' },
+      { name: 'tokenId', type: 'uint256' },
+    ],
+    name: 'getRentals',
+    outputs: [
+      {
+        components: [
+          { name: 'id', type: 'uint256' },
+          { name: 'renter', type: 'address' },
+          { name: 'start', type: 'uint256' },
+          { name: 'end', type: 'uint256' },
+          { name: 'amount', type: 'uint256' },
+          { name: 'deposit', type: 'uint256' },
+          { name: 'finalized', type: 'bool' },
+        ],
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { name: 'rentalId', type: 'uint256' },
+      { name: 'nft', type: 'address' },
+      { name: 'tokenId', type: 'uint256' },
+    ],
+    name: 'finalize',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+] as const
+
 export const SUB_PASS_1155_ABI = [
   {
     inputs: [

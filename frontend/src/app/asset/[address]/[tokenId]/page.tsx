@@ -7,6 +7,7 @@ import { DateTimeRangePicker } from '@/components/DateTimeRangePicker'
 import { CostBreakdown } from '@/components/CostBreakdown'
 import { AvailabilityBadge } from '@/components/AvailabilityBadge'
 import { PricePill } from '@/components/PricePill'
+import { RentButton } from '@/components/RentButton'
 import { RentalCost } from '@/lib/types'
 
 export default function AssetPage() {
@@ -133,12 +134,14 @@ export default function AssetPage() {
 
                 <CostBreakdown cost={rentalCost} />
 
-                <button
-                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                <RentButton
+                  nftAddress={listing.nftAddress}
+                  tokenId={listing.tokenId}
+                  startDate={startDate}
+                  endDate={endDate}
+                  rentalCost={rentalCost}
                   disabled={!listing.active}
-                >
-                  {listing.active ? 'Rent Now' : 'Not Available'}
-                </button>
+                />
               </div>
             </div>
 

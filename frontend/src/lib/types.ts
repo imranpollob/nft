@@ -32,3 +32,17 @@ export interface RentalCost {
   total: bigint
   fee: bigint
 }
+
+export interface Rental {
+  id: bigint
+  renter: `0x${string}`
+  start: bigint
+  end: bigint
+  amount: bigint
+  deposit: bigint
+  finalized: boolean
+  // Additional metadata
+  nftAddress: `0x${string}`
+  tokenId: bigint
+  listing?: Listing
+}
