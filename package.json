@@ -1,0 +1,30 @@
+{
+  "name": "nft-rental-marketplace",
+  "version": "1.0.0",
+  "description": "A comprehensive full-stack Ethereum-based NFT rental marketplace",
+  "scripts": {
+    "setup": "./setup-dev.sh",
+    "redeploy": "./redeploy.sh",
+    "test": "forge test",
+    "build": "forge build",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:install": "cd frontend && npm install"
+  },
+  "keywords": [
+    "nft",
+    "rental",
+    "marketplace",
+    "ethereum",
+    "solidity",
+    "foundry",
+    "nextjs",
+    "typescript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imranpollob/nft.git"
+  }
+}
