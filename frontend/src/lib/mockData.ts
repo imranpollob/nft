@@ -15,7 +15,7 @@ export const mockListings: Listing[] = [
     nonce: BigInt(1),
     name: 'Cosmic Ape #1',
     description: 'A rare cosmic ape from the depths of the metaverse',
-    image: 'https://via.placeholder.com/400x400?text=Cosmic+Ape+1',
+    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzMzMzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPkNvc21pYyBBcGUgIzE8L3RleHQ+PC9zdmc+',
     collection: 'Cosmic Apes',
   },
   {
@@ -31,7 +31,7 @@ export const mockListings: Listing[] = [
     nonce: BigInt(1),
     name: 'Digital Dragon #2',
     description: 'A majestic digital dragon with fiery breath',
-    image: 'https://via.placeholder.com/400x400?text=Digital+Dragon+2',
+    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzY2NkZGRiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPkRpZ2l0YWwgRHJhZ29uICMyPC90ZXh0Pjwvc3ZnPg==',
     collection: 'Digital Dragons',
   },
   {
@@ -47,7 +47,7 @@ export const mockListings: Listing[] = [
     nonce: BigInt(1),
     name: 'Pixel Punk #1',
     description: 'A retro pixel art punk from the 80s revival',
-    image: 'https://via.placeholder.com/400x400?text=Pixel+Punk+1',
+    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzMzNjY5OSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPlBpeGVsIFB1bmsgIzE8L3RleHQ+PC9zdmc+',
     collection: 'Pixel Punks',
   },
   {
@@ -63,7 +63,7 @@ export const mockListings: Listing[] = [
     nonce: BigInt(1),
     name: 'Neon Cat #2',
     description: 'A glowing neon cat that lights up the night',
-    image: 'https://via.placeholder.com/400x400?text=Neon+Cat+2',
+    image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzMzMzMzMyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zZW0iPk5lb24gQ2F0ICMyPC90ZXh0Pjwvc3ZnPg==',
     collection: 'Neon Cats',
   },
 ]

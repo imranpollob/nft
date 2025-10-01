@@ -2,6 +2,8 @@
 
 A comprehensive full-stack Ethereum-based NFT rental marketplace built with Solidity, Foundry, Next.js, and TypeScript. This platform enables NFT owners to list their assets for time-based rentals while providing renters with temporary access to exclusive digital assets, complete with a subscription system for premium features.
 
+---
+
 ## 🚀 Features
 
 ### Core Rental System
@@ -10,28 +12,79 @@ A comprehensive full-stack Ethereum-based NFT rental marketplace built with Soli
 - **Secure Escrow**: Funds are held safely until rental completion
 - **Protocol Fees**: Configurable fee structure with automatic distribution
 
-### Advanced Security
-- **Transfer Protection**: Prevents unauthorized transfers during active rentals
-- **Role-based Access**: Marketplace-controlled user assignment for rentals
-- **Reentrancy Guards**: Protection against common smart contract vulnerabilities
-- **Ownership Validation**: Race condition prevention for listing changes
-
 ### Subscription System
 - **ERC-1155 Membership Passes**: Time-boxed subscriptions for premium services
 - **Multiple Tiers**: Flexible tier system with independent expiry tracking
 - **Soulbound Options**: Optional transfer restrictions per subscription tier
 - **Renewal Logic**: Seamless extension of active memberships
 
-### Frontend Application
-- **Modern React UI**: Built with Next.js 15, TypeScript, and Tailwind CSS
-- **Wallet Integration**: RainbowKit and wagmi for seamless Web3 connectivity
-- **Real-time Updates**: Live countdown timers and status updates
-- **Responsive Design**: Mobile-first design for all devices
-- **Gated Content**: Subscription-based content access control
-
 ### Royalty Support
 - **ERC-2981 Compatible**: Standard royalty implementation for secondary sales
 - **Configurable Rates**: Default 5% royalty to original creators
+
+### Advanced Security
+- **Transfer Protection**: Prevents unauthorized transfers during active rentals
+- **Role-based Access**: Marketplace-controlled user assignment for rentals
+- **Reentrancy Guards**: Protection against common smart contract vulnerabilities
+- **Ownership Validation**: Race condition prevention for listing changes
+
+---
+
+## 🎨 Frontend Experiences
+
+#### Public Browsing (No Wallet Required)
+- **Browse Homepage**: View featured listings, marketplace stats, and "How It Works" guide
+- **Explore Listings**: Filter by collection, price range, and search for specific NFTs
+- **View NFT Details**: See metadata, pricing, availability, and rental terms for any NFT
+
+#### Wallet Integration
+- **Multi-Wallet Support**: MetaMask, WalletConnect, Coinbase Wallet, and more
+- **Network Switching**: Switch between Base and Polygon networks
+- **Account Management**: View connected address and network status
+
+#### NFT Owners (Asset Management)
+- **Create Listings**: List NFTs for rental with custom pricing, duration limits, and deposits
+- **Manage Listings**: View all owned listings with status (active/inactive)
+- **Edit Listings**: Update pricing, durations, and terms for existing listings
+- **Cancel Listings**: Remove listings from the marketplace
+- **Track Earnings**: View rental income and transaction history
+- **Approve NFTs**: Grant marketplace permission to manage NFT rentals
+
+#### NFT Renters (Rental Experience)
+- **Browse Available NFTs**: Discover rentable assets across collections
+- **Calculate Costs**: Real-time pricing with duration selection and cost breakdown
+- **Rent NFTs**: Secure rental transactions with automatic escrow
+- **View Active Rentals**: Track current rentals with live countdown timers
+- **Rental History**: View past rentals with transaction receipts and links
+- **Conflict Prevention**: Automatic prevention of double-bookings
+
+#### Subscription System (Premium Features)
+- **View Subscription Tiers**: Basic, Pro, and Enterprise plans with feature comparisons
+- **Purchase Subscriptions**: Buy or renew memberships with flexible duration options
+- **Membership Management**: View active subscriptions and expiry dates
+- **Gated Content Access**: Unlock exclusive content based on subscription tier
+- **Real-time Status**: Immediate updates after subscription purchases
+
+#### Dashboard & Analytics
+- **Owner Dashboard**: Comprehensive view of listings, earnings, and management tools
+- **Renter Dashboard**: Active rentals and complete transaction history
+- **Account Overview**: Subscription status and membership details
+- **Transaction Tracking**: Links to blockchain explorers for all transactions
+
+#### Real-time Features
+- **Live Cost Calculation**: Instant pricing updates as users adjust rental periods
+- **Countdown Timers**: Real-time countdown for active rentals
+- **Status Updates**: Immediate reflection of subscription and rental status changes
+- **Network Awareness**: Automatic adaptation to connected blockchain network
+
+#### User Interface
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
+- **Loading States**: Smooth loading indicators and skeleton screens
+- **Error Boundaries**: Graceful error handling with retry options
+- **Toast Notifications**: Real-time feedback for all user actions
+- **Optimistic Updates**: UI updates immediately after successful transactions
+
+---
 
 ## 🏗️ Architecture
 
@@ -65,52 +118,7 @@ A comprehensive full-stack Ethereum-based NFT rental marketplace built with Soli
 - Soulbound transfer restrictions
 - Multi-tier support
 
-### Frontend Application Structure
-
-```
-frontend/
-├── app/                    # Next.js App Router pages
-│   ├── asset/[...]/       # Individual NFT detail pages
-│   ├── listings/          # NFT listings browser
-│   ├── owner/             # Owner dashboard
-│   ├── me/                # Renter dashboard
-│   ├── account/           # User account & subscriptions
-│   ├── subscriptions/     # Subscription tiers
-│   └── gated-demo/        # Protected content demo
-├── components/            # Reusable React components
-├── hooks/                 # Custom React hooks for blockchain
-├── lib/                   # Utilities and configurations
-└── types/                 # TypeScript type definitions
-```
-
-## 📋 Prerequisites
-
-### Smart Contracts
-- [Foundry](https://book.getfoundry.sh/getting-started/installation.html)
-
-### Frontend Application
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-
-## 🛠️ Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/imranpollob/nft.git
-cd nft
-```
-
-2. Install smart contract dependencies:
-```bash
-forge install
-```
-
-3. Install frontend dependencies:
-```bash
-cd frontend
-npm install
-cd ..
-```
+---
 
 ### 🚀 Quick Development Setup
 
@@ -141,6 +149,21 @@ anvil
 ./redeploy.sh
 ```
 
+### 📦 NPM Scripts
+
+The project includes convenient npm scripts for common tasks:
+
+```bash
+npm run setup        # Run the full development setup
+npm run redeploy     # Redeploy contracts only
+npm run test         # Run smart contract tests
+npm run build        # Build smart contracts
+npm run frontend:dev # Start frontend development server
+npm run frontend:build # Build frontend for production
+npm run frontend:install # Install frontend dependencies
+```
+
+
 ## 🧪 Testing
 
 ### Smart Contracts
@@ -150,7 +173,6 @@ forge test
 ```
 
 **Test Coverage:**
-- **46 total tests** across all contracts
 - Unit tests for individual components
 - Integration tests for cross-contract interactions
 - Rental conflict prevention
@@ -199,82 +221,8 @@ npm run dev
 
 ### Environment Configuration
 
-The deployment scripts automatically create/update `frontend/.env.local` with deployed contract addresses. The file includes:
+The deployment scripts automatically create/update `frontend/.env.local` with deployed contract addresses. For full functionality, add these additional variables:
 
-```bash
-# Contract Addresses (Auto-generated by deployment script)
-NEXT_PUBLIC_RENTABLE_721_BASE=0x5fbdb2315678afecb367f032d93f642f64180aa3
-NEXT_PUBLIC_LISTING_MANAGER_BASE=0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
-NEXT_PUBLIC_RENTAL_MANAGER_BASE=0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
-NEXT_PUBLIC_ESCROW_BASE=0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9
-NEXT_PUBLIC_SUB_PASS_1155_BASE=0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
-```
-
-### Testing the Application
-
-1. Open http://localhost:3000
-2. Connect your wallet (MetaMask, etc.)
-3. Start testing the marketplace features:
-   - Browse NFT listings
-   - Create/manage listings (owner dashboard)
-   - Rent NFTs
-   - Purchase subscriptions
-   - View gated content
-
-## 📖 Usage
-
-### Smart Contracts
-
-#### Local Development
-Start a local Ethereum node:
-```bash
-anvil
-```
-
-#### Deployment
-Deploy contracts using Foundry scripts:
-```bash
-forge script script/Deploy.s.sol --rpc-url <rpc_url> --private-key <private_key>
-```
-
-#### Key Functions
-
-**Creating a Listing:**
-```solidity
-listingManager.createListing(
-    nftAddress,
-    tokenId,
-    pricePerSecond,
-    minDuration,
-    maxDuration,
-    depositAmount,
-    availabilityHash
-);
-```
-
-**Renting an NFT:**
-```solidity
-rentalManager.rent{value: totalCost}(
-    nftAddress,
-    tokenId,
-    startTime,
-    endTime
-);
-```
-
-**Managing Subscriptions:**
-```solidity
-subPass.mintOrRenew(
-    userAddress,
-    tierId,
-    durationInSeconds
-);
-```
-
-### Frontend Application
-
-#### Environment Setup
-Create a `.env.local` file in the `frontend/` directory:
 ```bash
 # WalletConnect Project ID (get from https://cloud.walletconnect.com/)
 NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id_here
@@ -286,18 +234,14 @@ NEXT_PUBLIC_DEFAULT_CHAIN=base
 NEXT_PUBLIC_BASE_RPC_URL=https://mainnet.base.org
 NEXT_PUBLIC_POLYGON_RPC_URL=https://polygon-rpc.com
 
-# Contract Addresses (update with deployed addresses)
-NEXT_PUBLIC_RENTABLE_721_BASE=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_RENTABLE_721_POLYGON=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_LISTING_MANAGER_BASE=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_LISTING_MANAGER_POLYGON=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_RENTAL_MANAGER_BASE=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_RENTAL_MANAGER_POLYGON=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_ESCROW_BASE=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_ESCROW_POLYGON=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_SUB_PASS_1155_BASE=0x0000000000000000000000000000000000000000
-NEXT_PUBLIC_SUB_PASS_1155_POLYGON=0x0000000000000000000000000000000000000000
+# Contract Addresses (Auto-generated by deployment script)
+NEXT_PUBLIC_RENTABLE_721_BASE=0x5fbdb2315678afecb367f032d93f642f64180aa3
+NEXT_PUBLIC_LISTING_MANAGER_BASE=0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+NEXT_PUBLIC_RENTAL_MANAGER_BASE=0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0
+NEXT_PUBLIC_ESCROW_BASE=0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9
+NEXT_PUBLIC_SUB_PASS_1155_BASE=0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
 ```
+
 
 #### User Flows
 
@@ -319,42 +263,3 @@ NEXT_PUBLIC_SUB_PASS_1155_POLYGON=0x0000000000000000000000000000000000000000
 2. Select duration and purchase subscription
 3. View membership status in `/account`
 4. Access gated content in `/gated-demo`
-
-## 🔒 Security
-
-### Smart Contracts
-- **Audited Components**: Built on OpenZeppelin battle-tested contracts
-- **Reentrancy Protection**: NonReentrant modifiers on critical functions
-- **Input Validation**: Comprehensive checks for all user inputs
-- **Access Control**: Owner-only functions with proper authorization
-
-### Frontend Application
-- **Type Safety**: Full TypeScript implementation
-- **Input Validation**: Client and server-side validation
-- **Secure Connections**: HTTPS and secure Web3 connections
-- **Error Handling**: Comprehensive error boundaries and user feedback
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [OpenZeppelin](https://openzeppelin.com/) for secure contract libraries
-- [Foundry](https://book.getfoundry.sh/) for the development framework
-- [Next.js](https://nextjs.org/) for the React framework
-- [RainbowKit](https://www.rainbowkit.com/) for wallet integration
-- [wagmi](https://wagmi.sh/) for blockchain interactions
-- Ethereum community for standards and best practices
-
----
-
-Built with ❤️ for the decentralized future
