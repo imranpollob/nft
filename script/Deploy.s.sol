@@ -6,7 +6,6 @@ import "../src/Rentable721.sol";
 import "../src/ListingManager.sol";
 import "../src/RentalManager.sol";
 import "../src/Escrow.sol";
-import "../src/SubPass1155.sol";
 
 contract Deploy is Script {
     function run() external {
@@ -32,9 +31,6 @@ contract Deploy is Script {
         Escrow escrow = new Escrow(address(rentalManager));
         console.log("Escrow deployed at:", address(escrow));
 
-        SubPass1155 subPass1155 = new SubPass1155("https://api.example.com/metadata/{id}.json");
-        console.log("SubPass1155 deployed at:", address(subPass1155));
-
         vm.stopBroadcast();
 
         // Output contract addresses for shell script parsing
@@ -43,7 +39,6 @@ contract Deploy is Script {
         console.log("LISTING_MANAGER:", vm.toString(address(listingManager)));
         console.log("RENTAL_MANAGER:", vm.toString(address(rentalManager)));
         console.log("ESCROW:", vm.toString(address(escrow)));
-        console.log("SUB_PASS_1155:", vm.toString(address(subPass1155)));
         console.log("END_DEPLOYMENT_ADDRESSES");
     }
 }

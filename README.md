@@ -1,6 +1,13 @@
 # NFT Rental Marketplace
 
-A comprehensive full-stack Ethereum-based NFT rental marketplace built with Solidity, Foundry, Next.js, and TypeScript. This platform enables NFT owners to list their assets for time-based rentals while providing renters with temporary access to exclusive digital assets, complete with a subscription system for premium features.
+A comprehensive full-stack E#### Dashboard & Analytics
+- **Owner Dashboard**: Comprehensive view of listings, earnings, and management tools
+- **Renter Dashboard**: Active rentals and complete transaction history
+- **Account Overvie**For Renters:**
+1. Browse available NFT listings
+2. Select rental duration and pay for rental
+3. Receive temporary access to the NFTConnected wallet and network status
+- **Transaction Tracking**: Links to blockchain explorers for all transactionsd NFT rental marketplace built with Solidity, Foundry, Next.js, and TypeScript. This platform enables NFT owners to list their assets for time-based rentals while providing renters with temporary access to exclusive digital assets.
 
 ---
 
@@ -11,12 +18,6 @@ A comprehensive full-stack Ethereum-based NFT rental marketplace built with Soli
 - **Conflict Prevention**: Advanced overlap detection prevents double-booking
 - **Secure Escrow**: Funds are held safely until rental completion
 - **Protocol Fees**: Configurable fee structure with automatic distribution
-
-### Subscription System
-- **ERC-1155 Membership Passes**: Time-boxed subscriptions for premium services
-- **Multiple Tiers**: Flexible tier system with independent expiry tracking
-- **Soulbound Options**: Optional transfer restrictions per subscription tier
-- **Renewal Logic**: Seamless extension of active memberships
 
 ### Royalty Support
 - **ERC-2981 Compatible**: Standard royalty implementation for secondary sales
@@ -58,23 +59,16 @@ A comprehensive full-stack Ethereum-based NFT rental marketplace built with Soli
 - **Rental History**: View past rentals with transaction receipts and links
 - **Conflict Prevention**: Automatic prevention of double-bookings
 
-#### Subscription System (Premium Features)
-- **View Subscription Tiers**: Basic, Pro, and Enterprise plans with feature comparisons
-- **Purchase Subscriptions**: Buy or renew memberships with flexible duration options
-- **Membership Management**: View active subscriptions and expiry dates
-- **Gated Content Access**: Unlock exclusive content based on subscription tier
-- **Real-time Status**: Immediate updates after subscription purchases
-
 #### Dashboard & Analytics
 - **Owner Dashboard**: Comprehensive view of listings, earnings, and management tools
 - **Renter Dashboard**: Active rentals and complete transaction history
-- **Account Overview**: Subscription status and membership details
+- **Account Overview**: Connected wallet and network status
 - **Transaction Tracking**: Links to blockchain explorers for all transactions
 
 #### Real-time Features
 - **Live Cost Calculation**: Instant pricing updates as users adjust rental periods
 - **Countdown Timers**: Real-time countdown for active rentals
-- **Status Updates**: Immediate reflection of subscription and rental status changes
+- **Status Updates**: Immediate reflection of rental status changes
 - **Network Awareness**: Automatic adaptation to connected blockchain network
 
 #### User Interface
@@ -177,7 +171,6 @@ forge test
 - Integration tests for cross-contract interactions
 - Rental conflict prevention
 - Transfer safety mechanisms
-- Subscription renewal logic
 - Royalty calculations
 - Access control validation
 
@@ -257,9 +250,3 @@ NEXT_PUBLIC_SUB_PASS_1155_BASE=0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
 3. Complete rental transaction with secure escrow
 4. Access rented NFT during rental period
 5. View rental history in `/me`
-
-**For Subscribers:**
-1. Visit `/subscriptions` to view available tiers
-2. Select duration and purchase subscription
-3. View membership status in `/account`
-4. Access gated content in `/gated-demo`

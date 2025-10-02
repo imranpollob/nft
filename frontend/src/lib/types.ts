@@ -46,19 +46,3 @@ export interface Rental {
   tokenId: bigint
   listing?: Listing
 }
-
-export interface SubscriptionTier {
-  id: bigint
-  name: string
-  description: string
-  pricePerSecond: bigint
-  features: string[]
-  popular?: boolean
-}
-
-export interface MembershipStatus {
-  tierId: bigint
-  isActive: boolean
-  activeUntil: bigint
-  tier?: SubscriptionTier
-}

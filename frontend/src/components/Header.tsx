@@ -30,9 +30,6 @@ export function Header() {
                   <Link href="/account" className="text-gray-600 hover:text-gray-900">
                     Account
                   </Link>
-                  <Link href="/subscriptions" className="text-gray-600 hover:text-gray-900">
-                    Subscriptions
-                  </Link>
                 </>
               )}
             </nav>

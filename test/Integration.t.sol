@@ -6,14 +6,12 @@ import "../src/Rentable721.sol";
 import "../src/ListingManager.sol";
 import "../src/RentalManager.sol";
 import "../src/Escrow.sol";
-import "../src/SubPass1155.sol";
 
 contract IntegrationTest is Test {
     Rentable721 rentable;
     ListingManager listingManager;
     RentalManager rentalManager;
     Escrow escrow;
-    SubPass1155 subPass;
 
     address owner = makeAddr("owner");
     address renter = makeAddr("renter");
@@ -28,7 +26,6 @@ contract IntegrationTest is Test {
         rentable = new Rentable721();
         listingManager = new ListingManager();
         rentalManager = new RentalManager(address(listingManager), feeRecipient, 500); // 5% fee, creates escrow internally
-        subPass = new SubPass1155("https://example.com/{id}.json");
 
         // Get escrow address from rentalManager
         escrow = Escrow(address(rentalManager.escrow()));
@@ -158,27 +155,21 @@ contract IntegrationTest is Test {
         assertEq(amount, 500); // 5% of 10000
     }
 
-    // 6. Subscription Integration: Use Subscription for Discount (Assuming extension)
-    function testSubscriptionIntegration() public {
-        // Mint subscription
-        vm.prank(owner);
-        subPass.mintOrRenew(renter, tierId, 86400); // 1 day
-
-        // Assume rental manager checks subscription for discount (not implemented, but test existence)
-        assertTrue(subPass.isActive(renter, tierId));
-
-        // Proceed with rental as normal
+    // 5. End-to-End Rental Flow
+    function testEndToEndRental() public {
+        // Create listing
         vm.prank(owner);
         listingManager.createListing(address(rentable), tokenId, 277777777777777, 3600, 86400, 0, bytes32(0));
 
+        // Rent NFT
         vm.prank(renter);
         rentalManager.rent{value: 1 ether}(address(rentable), tokenId, block.timestamp + 100, block.timestamp + 3700);
 
-        // Subscription still active
-        assertTrue(subPass.isActive(renter, tierId));
+        // Verify rental
+        assertEq(rentable.userOf(tokenId), renter);
     }
 
-    // 7. Stress: Multiple Rentals on Different NFTs
+    // 6. Stress: Multiple Rentals on Different NFTs
     function testMultipleRentals() public {
         // Mint another NFT
         vm.prank(owner);
@@ -203,7 +194,7 @@ contract IntegrationTest is Test {
         assertEq(rentable.userOf(2), other);
     }
 
-    // 8. Error: Unauthorized Transfer During Rental
+    // 7. Error: Unauthorized Transfer During Rental
     function testTransferDuringRentalBlocked() public {
         vm.prank(owner);
         listingManager.createListing(address(rentable), tokenId, 277777777777777, 3600, 86400, 0, bytes32(0));
@@ -215,17 +206,5 @@ contract IntegrationTest is Test {
         vm.prank(owner);
         vm.expectRevert("Rentable721: cannot transfer while rented");
         rentable.transferFrom(owner, other, tokenId);
-    }
-
-    // 9. Subscription: Soulbound Transfer Blocked
-    function testSoulboundSubscriptionTransfer() public {
-        vm.prank(owner);
-        subPass.setSoulbound(tierId, true);
-        vm.prank(owner);
-        subPass.mint(owner, tierId, 1, "");
-
-        vm.prank(owner);
-        vm.expectRevert("SubPass1155: soulbound tier cannot be transferred");
-        subPass.safeTransferFrom(owner, other, tierId, 1, "");
     }
 }
