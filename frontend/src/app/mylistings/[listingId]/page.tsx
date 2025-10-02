@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useAccount } from 'wagmi'
+import Image from 'next/image'
 import { useListing } from '@/hooks/useListings'
 import { useUpdateListing, useCancelListing } from '@/hooks/useListingManagement'
 import { ListingForm } from '@/components/ListingForm'
@@ -89,7 +90,7 @@ export default function ListingManagementPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
             <p className="mt-4 text-gray-600">Loading listing...</p>
@@ -120,7 +121,7 @@ export default function ListingManagementPage() {
   if (!address || listing.owner.toLowerCase() !== address.toLowerCase()) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <p className="text-red-600">You don&apos;t have permission to manage this listing</p>
             <Link
@@ -146,7 +147,7 @@ export default function ListingManagementPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
@@ -157,7 +158,7 @@ export default function ListingManagementPage() {
               </p>
             </div>
             <Link
-              href="/owner"
+              href="/mylistings"
               className="text-blue-600 hover:text-blue-800 font-medium"
             >
               ← Back to Dashboard
@@ -172,12 +173,13 @@ export default function ListingManagementPage() {
               <h2 className="text-lg font-semibold mb-4">Listing Preview</h2>
 
               <div className="space-y-4">
-                <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
+                <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden relative">
                   {listing.image ? (
-                    <img
+                    <Image
                       src={listing.image}
                       alt={listing.name || `NFT ${listing.tokenId}`}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400">

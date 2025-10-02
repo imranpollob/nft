@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useParams } from 'next/navigation'
+import Image from 'next/image'
 import { useListing } from '@/hooks/useListings'
 import { DateTimeRangePicker } from '@/components/DateTimeRangePicker'
 import { CostBreakdown } from '@/components/CostBreakdown'
@@ -69,12 +70,13 @@ export default function AssetPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Asset Image */}
           <div className="space-y-4">
-            <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden">
+            <div className="aspect-square bg-gray-200 rounded-lg overflow-hidden relative">
               {listing.image ? (
-                <img
+                <Image
                   src={listing.image}
                   alt={listing.name || `NFT ${listing.tokenId}`}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -108,6 +110,18 @@ export default function AssetPage() {
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Status</span>
                   <AvailabilityBadge available={listing.active} />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Min Duration</span>
+                  <span className="font-medium">
+                    {Math.floor(Number(listing.minDuration) / 3600)}h {Math.floor((Number(listing.minDuration) % 3600) / 60)}m
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Max Duration</span>
+                  <span className="font-medium">
+                    {Math.floor(Number(listing.maxDuration) / 3600)}h {Math.floor((Number(listing.maxDuration) % 3600) / 60)}m
+                  </span>
                 </div>
               </div>
             </div>
