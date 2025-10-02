@@ -16,15 +16,15 @@ export function Header() {
               NFT Rental Marketplace
             </Link>
             <nav className="hidden md:flex space-x-6">
-              <Link href="/listings" className="text-gray-600 hover:text-gray-900">
+              <Link href="/browse" className="text-gray-600 hover:text-gray-900">
                 Browse
               </Link>
               {isConnected && (
                 <>
-                  <Link href="/owner" className="text-gray-600 hover:text-gray-900">
-                    List NFT
+                  <Link href="/mylistings" className="text-gray-600 hover:text-gray-900">
+                    My Listings
                   </Link>
-                  <Link href="/me" className="text-gray-600 hover:text-gray-900">
+                  <Link href="/myrentals" className="text-gray-600 hover:text-gray-900">
                     My Rentals
                   </Link>
                   <Link href="/account" className="text-gray-600 hover:text-gray-900">

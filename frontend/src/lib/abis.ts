@@ -7,6 +7,18 @@ export const RENTABLE_721_ABI = [
     stateMutability: 'view',
     type: 'function',
   },
+  {
+    inputs: [{ name: 'tokenId', type: 'uint256' }],
+    name: 'getTokenMetadata',
+    outputs: [
+      { name: 'name', type: 'string' },
+      { name: 'description', type: 'string' },
+      { name: 'image', type: 'string' },
+      { name: 'collection', type: 'string' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
 ] as const
 
 export const LISTING_MANAGER_ABI = [

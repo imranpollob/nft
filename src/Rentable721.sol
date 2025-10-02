@@ -24,6 +24,12 @@ contract Rentable721 is ERC721, Ownable, IERC4907, IERC2981 {
     mapping(uint256 => UserInfo) private _users;
     address public marketplace;
 
+    // Token metadata
+    mapping(uint256 => string) private _tokenNames;
+    mapping(uint256 => string) private _tokenDescriptions;
+    mapping(uint256 => string) private _tokenImages;
+    mapping(uint256 => string) private _tokenCollections;
+
     constructor() ERC721("RentableNFT", "RNFT") Ownable(msg.sender) {}
 
     function setMarketplace(address _marketplace) external onlyOwner {
@@ -52,6 +58,29 @@ contract Rentable721 is ERC721, Ownable, IERC4907, IERC2981 {
 
     function mint(address to, uint256 id) external onlyOwner {
         _mint(to, id);
+    }
+
+    function mintWithMetadata(
+        address to,
+        uint256 tokenId,
+        string memory name,
+        string memory description,
+        string memory image,
+        string memory collection
+    ) external onlyOwner {
+        _mint(to, tokenId);
+        _tokenNames[tokenId] = name;
+        _tokenDescriptions[tokenId] = description;
+        _tokenImages[tokenId] = image;
+        _tokenCollections[tokenId] = collection;
+    }
+
+    function getTokenMetadata(uint256 tokenId)
+        external
+        view
+        returns (string memory name, string memory description, string memory image, string memory collection)
+    {
+        return (_tokenNames[tokenId], _tokenDescriptions[tokenId], _tokenImages[tokenId], _tokenCollections[tokenId]);
     }
 
     function _isApprovedOrOwner(address spender, uint256 tokenId) internal view returns (bool) {
